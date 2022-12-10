@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   decrement,
   increment,
@@ -7,14 +7,15 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+} from "./counterSlice";
+import styles from "./Counter.module.css";
+import { getProduct } from "../../app/slice/productSlice";
 
 export function Counter() {
-  const count = useSelector(selectCount);
+  const { count, productSlice } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-
+  const [incrementAmount, setIncrementAmount] = useState("2");
+  console.log(productSlice);
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
@@ -23,7 +24,7 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(getProduct())}
         >
           -
         </button>

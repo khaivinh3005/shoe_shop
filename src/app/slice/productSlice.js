@@ -9,7 +9,7 @@ const initialState = {
 
 export const getProduct = createAsyncThunk(
   "product/getProduct",
-  async (params, thunkAPI) => {
+  async (params = "", thunkAPI) => {
     try {
       const response = await productAPI.getProduct(params);
       return response;
@@ -24,15 +24,16 @@ const productSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProduct.fulfilled, (state, action) => {
-      state.products = action.payload.content;
-      state.isLoading = false;
-    });
     builder.addCase(getProduct.pending, (state, action) => {
       state.isLoading = true;
     });
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.products = action.payload;
+      state.isLoading = false;
+    });
     builder.addCase(getProduct.rejected, (state, action) => {
       state.error = action.error.message;
+      state.isLoading = false;
     });
   },
 });

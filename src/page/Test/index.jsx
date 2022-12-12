@@ -1,10 +1,15 @@
-import React from 'react'
-import { Counter } from '../../features/counter/Counter';
+import React from "react";
+import { Counter } from "../../features/counter/Counter";
+import DemoContainerComponent from "../../HOC/DemoContainerComponent";
+import DemoModalHOC from "../../HOC/DemoModalHOC";
+import { ModalHOC } from "../../HOC/ModalHOC";
 
 const Test = () => {
-    return (
-        <div className="App">
-          <header className="App-header">
+  return (
+    <div className="App">
+      {/* <DemoContainerComponent /> */}
+      {/* <DemoModalHOC /> */}
+      {/* <header className="App-header">
             <Counter />
             <p>
               Edit <code>src/App.js</code> and save to reload.
@@ -47,9 +52,9 @@ const Test = () => {
                 React Redux
               </a>
             </span>
-          </header>
-        </div>
-      );
-}
+          </header> */}
+    </div>
+  );
+};
 
-export default Test
+export default Test;

@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ModalHOC = (props) => {
-  const { component } = useSelector((state) => state.modalSlice);
+  // const { component } = useSelector((state) => state.modalSlice);
   return (
     <div>
       <button
@@ -43,7 +43,7 @@ const ModalHOC = (props) => {
             </div>
             <div className="modal-body">
               {/* <FunctionComponent /> */}
-              {component}
+              {/* {component} */}
             </div>
             <div className="modal-footer">
               <button

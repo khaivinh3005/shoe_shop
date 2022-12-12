@@ -1,19 +1,19 @@
 import React from "react";
 import { Counter } from "./features/counter/Counter";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import "./App.css";
-import Test from "./page/Test";
-import Search from "page/Search";
-import Register from "page/Register";
-import Login from "page/Login";
-import Profile from "page/Profile";
-import Detail from "page/Detail";
-import Carts from "page/Carts";
-import Home from "page/Home";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import HomeTemplate from "./templates/MainTemplate/HomeTemplate.jsx";
+import Test from "./pages/Test/Test";
+import Search from "./pages/Search/Search";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+import Detail from "./pages/Detail/Detail";
+import Carts from "./pages/Carts/Carts";
+import Home from "./pages/Home/Home";
+import { createBrowserHistory } from "history";
 import ModalHOC from "./HOC/ModalHOC";
-import HomeTemplate from "./templates/MainTemplate/HomeTemplate";
 
 export const history = createBrowserHistory();
 
@@ -23,7 +23,7 @@ function App() {
       {/* <BrowserRouter> */}
       <Routes>
         <Route path="" element={<HomeTemplate />}>
-          <Route path="test" element={<Test />} />
+          {/* <Route path="test" element={<Test />} /> */}
           <Route path="register" element={<Register />} />
           <Route path="search" element={<Search />} />
           <Route path="login" element={<Login />} />

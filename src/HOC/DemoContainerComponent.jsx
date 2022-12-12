@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalComponent, setModalContent } from "../app/slice/modalSlice";
 import ModalHOC from "./ModalHOC";
-import Login from "page/Login/";
-import Register from "page/Register/";
+import Login from "pages/Login/Login";
+import Register from "pages/Register/Register";
 
 const DemoContainerComponent = () => {
   //   const [component, setComponent] = useState(<div>default</div>);

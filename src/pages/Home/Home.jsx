@@ -2,9 +2,11 @@ import React from "react";
 import { Carousel } from "antd";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ShoesCard from "../../components/ShoesCard/ShoesCard"
+import ShoesCard from "../../components/ShoesCard/ShoesCard";
 import { useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
+import productAPI from "../../service/productAPI";
+import { getAllProductAPI } from "../../redux/reducers/productReducer";
 
 const contentStyle = {
   margin: 0,
@@ -17,27 +19,22 @@ const contentStyle = {
 
 const Home = () => {
   const { arrProduct } = useSelector((state) => state.productReducer);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onChange = (currentSlide) => {
     console.log(currentSlide);
   };
 
   const getAllProduct = async () => {
-    const result = await axios ({
-      url: 'https://shop.cyberlearn.vn/api/product',
-      method: 'GET'
-    })
-    //dispatch action lên reducer
-    const action = {
-      type: 'productReducer/getAllProductApi',
-      payload: result.data.content
-    }
-    dispatch(action)
-  }
-  useEffect(()=>{
+    // const result = await axios({
+    //   url: "https://shop.cyberlearn.vn/api/product",
+    //   method: "GET",
+    // });
+    dispatch(getAllProductAPI());
+  };
+  useEffect(() => {
     //Call API
-    getAllProduct()
-  }, [])
+    getAllProduct();
+  }, []);
 
   return (
     <div className="container">
@@ -60,11 +57,7 @@ const Home = () => {
           >
             <ul className="menu navbar-nav me-auto mt-2 mt-lg-0">
               <li className="nav-item">
-                <NavLink
-                  className="nav-link active"
-                  to="/"
-                  aria-current="page"
-                >
+                <NavLink className="nav-link active" to="/" aria-current="page">
                   Home <span className="visually-hidden">(current)</span>
                 </NavLink>
               </li>
@@ -159,7 +152,7 @@ const Home = () => {
           <div className="container">
             <h3 className="product-feature text-white py-2">Product Feature</h3>
             <div className="row">
-              {arrProduct.map((item, index) => {
+              {arrProduct?.map((item, index) => {
                 return (
                   <div key={index} className="col-md-4 product-item">
                     <ShoesCard prod={item} />

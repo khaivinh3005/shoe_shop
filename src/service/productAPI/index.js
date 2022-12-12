@@ -8,5 +8,6 @@ import { axiosClient } from "..";
       params: { keyword: keyword },
     });
   },
+  // viết tiếp các axios call api ở đây
 };
 export default productAPI

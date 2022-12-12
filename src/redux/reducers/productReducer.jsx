@@ -1,24 +1,31 @@
 //rxslice
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import productAPI from "../../service/productAPI";
 
 const initialState = {
-    arrProduct: [
-        {id: 1, name: 'product1', image: './../../img/shoes.png', price: 1000},
-        {id: 2, name: 'product2', image: './../../img/shoes.png', price: 2000},
-        {id: 3, name: 'product3', image: './../../img/shoes.png', price: 3000},
-  ]
-}
+  arrProduct: [],
+};
 
 const productReducer = createSlice({
-  name: 'productReducer', //tên reducer
+  name: "productReducer", //tên reducer
   initialState, //giá trị state mặc định
   reducers: {
-    getAllProductApi: (state, action) => {
-        state.arrProduct = action.payload
-    }
-  }
+    getAllProduct: (state, action) => {
+      state.arrProduct = action.payload;
+    },
+  },
 });
 
-export const {getAllProductApi} = productReducer.actions
+// action thunk call api get data then dispatch data cho reducer
+export const getAllProductAPI = () => {
+  return async (dispatch) => {
+    //productAPI là object trỏ để lấy các function call api
+    const result = await productAPI.getProduct();
+    const action = result;
+    dispatch(getAllProduct(action));
+  };
+};
 
-export default productReducer.reducer
+export const { getAllProduct } = productReducer.actions;
+
+export default productReducer.reducer;

@@ -111,16 +111,29 @@ footer .copyright {
 }
 
 .buynow {
+  font-size: 24px;
+  font-weight: 400;
   background-color: #9de167;
+  padding: 17px 0;
 }
 
 .price {
+  font-size: 24px;
+  font-weight: 600;
   background-color: #dedddc;
+  padding: 17px 0;
 }
 
 .card {
   background-color: #F8F8F8;
   border: none;
   width: 334px;
+}
+
+.prodDetail {
+  width: 334px;
+  height: 355px;
+  background-color: #F8F8F8;
+  margin-left: 64px;
 }
 

@@ -24,14 +24,16 @@ function App() {
       <Routes>
         <Route path="" element={<HomeTemplate />}>
           {/* <Route path="test" element={<Test />} /> */}
-          <Route path="register" element={<Register />} />
-          <Route path="search" element={<Search />} />
-          <Route path="login" element={<Login />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="detail" element={<Detail />} />
-          <Route path="carts" element={<Carts />} />
-          <Route index element={<Home />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="register" element={<Register />}></Route>
+          <Route path="search" element={<Search />}></Route>
+          <Route path="login" element={<Login />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
+          <Route path="detail" >
+            <Route path=":id" element={<Detail />}></Route>
+          </Route>
+          <Route path="carts" element={<Carts />}></Route>
+          <Route index element={<Home />}></Route>
+          <Route path="*" element={<Navigate to="/" />}></Route>
         </Route>
       </Routes>
       <ModalHOC />

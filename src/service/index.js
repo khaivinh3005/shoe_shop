@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../common/const";
-import {history} from '../App'
+import { history } from "../App";
+import reactLocalStorage from "utils/reactLocalStorage";
 export const axiosClient = axios.create({
   baseURL: BASE_URL,
   timeout: 60000, // time ko nhận được request sẽ hủy
@@ -9,7 +10,12 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    if (config.headers) return config;
+    const accessToken = reactLocalStorage.get("shoeToken");
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
   },
   function (error) {
     // Do something with request error

@@ -1,9 +1,11 @@
+import axios from "axios";
 import { axiosClient } from "..";
 
 const URL_USER_SIGNUP = "/api/Users/signup";
 const URL_USER_SIGNIN = "/api/Users/signin";
 const URL_USER_DETAIL = "/api/Users/getProfile";
-
+const URL_USER_UPDATE = "/api/Users/updateProfile";
+const URL_USER_UPDATE_PASS = "/api/Users/changePassword"
 const userAPI = {
   signUp: ({ email, name, password, gender, phone }) => {
     return axiosClient.post(URL_USER_SIGNUP, {
@@ -21,17 +23,17 @@ const userAPI = {
   getUserDetail: () => {
     return axiosClient.post(URL_USER_DETAIL);
   },
-  // axiosClient({
-  //   method: "post",
-  //   url: URL_USER_SIGNUP,
-  //   params: {
-  //     email: email,
-  //     password: password,
-  //     name: name,
-  //     gender: gender,
-  //     phone: phone,
-  //   },
-  // });
-  // viết tiếp các axios call api ở đây
+  updateUser: ({ email, password, name, phone, gender }) => {
+    return axiosClient.post(URL_USER_UPDATE, {
+      email,
+      password,
+      name,
+      phone,
+      gender,
+    });
+  },
+  changePassword: ({newPassword})=>{
+    return axiosClient.post(URL_USER_UPDATE_PASS,{newPassword})
+  }
 };
 export default userAPI;

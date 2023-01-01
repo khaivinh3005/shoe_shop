@@ -4,7 +4,7 @@ import { history } from "../App";
 import reactLocalStorage from "utils/reactLocalStorage";
 export const axiosClient = axios.create({
   baseURL: BASE_URL,
-  timeout: 60000, // time ko nhận được request sẽ hủy
+  timeout: 60000, // time ko nhận được request sẽ hủy\
 });
 
 axiosClient.interceptors.request.use(

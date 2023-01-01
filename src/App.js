@@ -41,7 +41,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" />}></Route>
         </Route>
       </Routes>
-      <ModalHOC />
       {/* </BrowserRouter> */}
     </HistoryRouter>
   );

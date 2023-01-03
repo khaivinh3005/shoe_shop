@@ -1,20 +1,27 @@
+import { unwrapResult } from "@reduxjs/toolkit";
 import { notification } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import store from "redux/configStore";
 import {
   addProductItem,
+  clearCart,
   removeProductItem,
 } from "redux/reducers/productReducer";
+import { getUser, orderShoes } from "redux/user";
 
 const Carts = () => {
   const { addToCart } = useSelector((state) => state.productReducer);
+  const { userToken, user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
-  const user = store.getState().userSlice.user;
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
   const handleOrder = () => {
     console.log(addToCart);
-    console.log(user);
-    if (!user) {
+    console.log(userToken);
+    if (!userToken) {
       notification.error({ placement: "top", message: "Bạn chưa đăng nhập!" });
       return;
     }
@@ -28,6 +35,11 @@ const Carts = () => {
     };
 
     console.log(orderDetail);
+    dispatch(orderShoes(orderDetail))
+      .then(unwrapResult)
+      .then((originalResponse) => {
+        dispatch(clearCart());
+      });
   };
   return (
     <div className="container">

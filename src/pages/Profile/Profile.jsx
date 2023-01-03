@@ -16,12 +16,12 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import ChangePassForm from "components/common/ChangePassForm/ChangePassForm";
 
 const Profile = () => {
-  const { user } = useSelector((state) => state.userSlice);
+  const { user, userToken } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
   const [form] = useForm();
-  const accessToken = reactLocalStorage.get("shoeToken");
+  console.log(user);
   useEffect(() => {
-    if (!user) {
+    if (userToken) {
       dispatch(getUser());
       return;
     }

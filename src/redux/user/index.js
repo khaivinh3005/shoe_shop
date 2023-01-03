@@ -59,6 +59,18 @@ export const changePass = createAsyncThunk(
   }
 );
 
+export const orderShoes = createAsyncThunk(
+  "userSlice/orderShoes",
+  async (value, thunkAPI) => {
+    try {
+      const response = userAPI.order(value);
+      return response;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "userSlice",
   initialState,
@@ -90,9 +102,12 @@ const userSlice = createSlice({
     });
     builder.addCase(changePass.fulfilled, (state, action) => {});
     builder.addCase(signIn.fulfilled, (state, action) => {
-      console.log(action.payload)
-      state.userToken = action.payload;
+      reactLocalStorage.set("shoeToken", action.payload.accessToken);
+      state.userToken = action.payload.accessToken;
     });
+    builder.addCase(orderShoes.fulfilled, (state,action)=>{
+      console.log(action.payload)
+    })
   },
 });
 

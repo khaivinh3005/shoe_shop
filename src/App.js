@@ -30,13 +30,13 @@ function App() {
           <Route path="login" element={<Login />}></Route>
 
           <Route element={<PrivateRoute />}>
+            <Route path="carts" element={<Carts />}></Route>
             <Route path="profile" element={<Profile />}></Route>
           </Route>
 
           <Route path="detail">
             <Route path=":id" element={<Detail />}></Route>
           </Route>
-          <Route path="carts" element={<Carts />}></Route>
           <Route index element={<Home />}></Route>
           <Route path="*" element={<Navigate to="/" />}></Route>
         </Route>

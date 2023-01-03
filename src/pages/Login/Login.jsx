@@ -11,6 +11,7 @@ import userAPI from "service/userAPI";
 import reactLocalStorage from "utils/reactLocalStorage";
 import { useDispatch } from "react-redux";
 import { signIn } from "redux/user";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +19,17 @@ const Login = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
 
-    dispatch(signIn(values));
+    dispatch(signIn(values))
+      .then(unwrapResult)
+      .then((originalPromiseResult) => {
+        // handle result here
+        console.log(originalPromiseResult)
+        navigate("/profile")
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        // handle error here
+        console.log(rejectedValueOrSerializedError);
+      });
 
     // userAPI.signIn(values).then(
     //   (response) => {

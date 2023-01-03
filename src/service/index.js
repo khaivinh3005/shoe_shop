@@ -2,6 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "../common/const";
 import { history } from "../App";
 import reactLocalStorage from "utils/reactLocalStorage";
+import store from "redux/configStore";
 export const axiosClient = axios.create({
   baseURL: BASE_URL,
   timeout: 60000, // time ko nhận được request sẽ hủy\
@@ -10,10 +11,9 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    const accessToken = reactLocalStorage.get("shoeToken");
-
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    const userToken = store.getState().userSlice.userToken;
+    if (userToken) {
+      config.headers.Authorization = `Bearer ${userToken}`;
     }
     return config;
   },

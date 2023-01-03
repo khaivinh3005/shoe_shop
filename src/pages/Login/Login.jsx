@@ -9,21 +9,30 @@ import {
 } from "@ant-design/icons";
 import userAPI from "service/userAPI";
 import reactLocalStorage from "utils/reactLocalStorage";
+import { useDispatch } from "react-redux";
+import { signIn } from "redux/user";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const onFinish = (values) => {
     console.log("Success:", values);
-    userAPI.signIn(values).then(
-      (response) => {
-        reactLocalStorage.set("shoeToken", response.accessToken);
-        navigate("/profile");
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+
+    dispatch(signIn(values));
+
+    // userAPI.signIn(values).then(
+    //   (response) => {
+    //     console.log(response);
+    //     reactLocalStorage.set("shoeToken", response.accessToken);
+    //     navigate("/profile");
+    //   },
+    //   (err) => {
+    //     notification.error({
+    //       message: err.response.data.message,
+    //       placement: "top",
+    //     });
+    //   }
+    // );
   };
 
   const onFinishFailed = (errorInfo) => {

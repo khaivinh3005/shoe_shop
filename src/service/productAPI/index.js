@@ -1,6 +1,6 @@
 import { axiosClient } from "..";
-
-  const productAPI = {
+const URL_ORDER = "/api/Users/order";
+const productAPI = {
   getProduct: (keyword) => {
     return axiosClient({
       method: "get",
@@ -8,6 +8,8 @@ import { axiosClient } from "..";
       params: { keyword: keyword },
     });
   },
+
+  order: () => axiosClient({ method: "POST" }),
   // viết tiếp các axios call api ở đây
 };
-export default productAPI
+export default productAPI;

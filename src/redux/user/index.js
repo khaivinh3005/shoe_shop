@@ -3,11 +3,23 @@ import userAPI from "service/userAPI";
 import reactLocalStorage from "utils/reactLocalStorage";
 
 const initialState = {
+  userToken: reactLocalStorage.get("shoeToken") || null,
   user: null,
   isLoading: false,
   error: null,
 };
-
+export const signIn = createAsyncThunk(
+  "userSlice/signIn",
+  async (value, thunkAPI) => {
+    try {
+      const res = userAPI.signIn(value);
+      thunkAPI.fulfillWithValue(res);
+      return res;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const getUser = createAsyncThunk(
   "userSlice/getUser",
   async (value, thunkAPI) => {
@@ -77,6 +89,10 @@ const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(changePass.fulfilled, (state, action) => {});
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      console.log(action.payload)
+      state.userToken = action.payload;
+    });
   },
 });
 

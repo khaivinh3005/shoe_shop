@@ -9,7 +9,6 @@ const productAPI = {
     });
   },
 
-  order: () => axiosClient({ method: "POST" }),
   // viết tiếp các axios call api ở đây
 };
 export default productAPI;

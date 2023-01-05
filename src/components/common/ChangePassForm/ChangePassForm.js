@@ -8,7 +8,7 @@ import { changePass } from "redux/user";
 const ChangePassForm = (props) => {
   const dispatch = useDispatch();
   const onFinish = (value) => {
-    console.log(value);
+    console.log(value)
     dispatch(changePass(value))
       .unwrap()
       .then((result) => {
@@ -23,7 +23,7 @@ const ChangePassForm = (props) => {
   return (
     <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
       <Form.Item
-        name="password"
+        name="newPassword"
         rules={[
           { required: true, message: "Please input your new password!" },
           {
@@ -35,7 +35,7 @@ const ChangePassForm = (props) => {
         ]}
       >
         <Input.Password
-          id="password"
+          id="newPassword"
           className="input-form-signup"
           placeholder="Password"
           iconRender={(visible) =>

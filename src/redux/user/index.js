@@ -78,6 +78,10 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    logout: (state, action) => {
+      state.userToken = null;
+      reactLocalStorage.clear();
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getUser.fulfilled, (state, action) => {
@@ -105,12 +109,12 @@ const userSlice = createSlice({
       reactLocalStorage.set("shoeToken", action.payload.accessToken);
       state.userToken = action.payload.accessToken;
     });
-    builder.addCase(orderShoes.fulfilled, (state,action)=>{
-      console.log(action.payload)
-    })
+    builder.addCase(orderShoes.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser,logout } = userSlice.actions;
 
 export default userSlice.reducer;

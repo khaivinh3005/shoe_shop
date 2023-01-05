@@ -5,8 +5,8 @@ const URL_USER_SIGNUP = "/api/Users/signup";
 const URL_USER_SIGNIN = "/api/Users/signin";
 const URL_USER_DETAIL = "/api/Users/getProfile";
 const URL_USER_UPDATE = "/api/Users/updateProfile";
-const URL_USER_UPDATE_PASS = "/api/Users/changePassword"
-const URL_USER_ORDER = "/api/Users/order"
+const URL_USER_UPDATE_PASS = "/api/Users/changePassword";
+const URL_USER_ORDER = "/api/Users/order";
 
 const userAPI = {
   signUp: ({ email, name, password, gender, phone }) => {
@@ -34,12 +34,11 @@ const userAPI = {
       gender,
     });
   },
-  changePassword: ({newPassword})=>{
-    return axiosClient.post(URL_USER_UPDATE_PASS,{newPassword})
+  changePassword: ({ newPassword }) => {
+    return axiosClient.post(URL_USER_UPDATE_PASS, { newPassword: newPassword });
   },
-  order: (orderDetail)=>{
-    return axiosClient.post(URL_USER_ORDER,orderDetail)
-
-  }
+  order: (orderDetail) => {
+    return axiosClient.post(URL_USER_ORDER, orderDetail);
+  },
 };
 export default userAPI;

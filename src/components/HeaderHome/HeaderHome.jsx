@@ -1,53 +1,60 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Button } from "antd";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { logout } from "redux/user";
 
 const HeaderHome = () => {
   const { addToCart } = useSelector((state) => state.productReducer);
-
+  const { userToken } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
-    <div className='container'>
-      <nav className='header navbar navbar-expand-sm navbar-dark bg-dark'>
-        <NavLink className='navbar-brand' to='/'>
-          <img src='./img/logo-cybersoft.png' alt='' />
+    <div className="container">
+      <nav className="header navbar navbar-expand-sm navbar-dark bg-dark">
+        <NavLink className="navbar-brand" to="/">
+          <img src="./img/logo-cybersoft.png" alt="" />
         </NavLink>
         <button
-          className='navbar-toggler d-lg-none'
-          type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#collapsibleNavId'
-          aria-controls='collapsibleNavId'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
+          className="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         />
-        <div className='collapse navbar-collapse' id='collapsibleNavId'>
-          <ul className='navbar-nav me-auto mt-2 mt-lg-0'>
+        <div className="collapse navbar-collapse" id="collapsibleNavId">
+          <ul className="navbar-nav me-auto mt-2 mt-lg-0">
             {/* <li className="nav-item">
             <NavLink className="nav-link active" to="/" aria-current="page">
               Home
             </NavLink>
           </li> */}
           </ul>
-          <form className='d-flex align-items-center'>
-            <NavLink to='/search' className='search nav-link text-white'>
-              <i className='fa fa-search mx-2'></i>
+          <form className="d-flex align-items-center">
+            <NavLink to="/search" className="search nav-link text-white">
+              <i className="fa fa-search mx-2"></i>
               Search
             </NavLink>
 
-            <NavLink to='/carts'>
+            <NavLink to="/carts">
               <i
-                className='fa fa-cart-plus text-white mx-4 my-2'
-                style={{ fontSize: '25px' }}
+                className="fa fa-cart-plus text-white mx-4 my-2"
+                style={{ fontSize: "25px" }}
               >
                 {`(${addToCart ? addToCart.length : 0})`}
               </i>
             </NavLink>
-            <NavLink to='/login' className='nav-link text-white'>
+            <NavLink to="/login" className="nav-link text-white">
               Login
             </NavLink>
-            <NavLink to='/register' className='nav-link text-white mx-4'>
+            <NavLink to="/register" className="nav-link text-white mx-4">
               Register
             </NavLink>
+            {userToken && <Button onClick={handleLogout}>Logout</Button>}
           </form>
         </div>
       </nav>

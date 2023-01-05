@@ -14,12 +14,12 @@ import * as S from "./style";
 import { useForm } from "antd/es/form/Form";
 import { unwrapResult } from "@reduxjs/toolkit";
 import ChangePassForm from "components/common/ChangePassForm/ChangePassForm";
+import OrderHistory from "pages/Login/OrderHistory/OrderHistory";
 
 const Profile = () => {
   const { user, userToken } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
   const [form] = useForm();
-  console.log(user);
   useEffect(() => {
     if (userToken) {
       dispatch(getUser());
@@ -177,6 +177,8 @@ const Profile = () => {
           </div>
         </S.ProfileContainer>
       </Form>
+
+      <OrderHistory orderHistory={user?.ordersHistory} />
     </div>
   );
 };
